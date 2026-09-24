@@ -292,9 +292,32 @@ with st.form("employee_registration_form"):
 
 
 # =========================================================
-# SIMPLE FRONTEND RESPONSE
+# Forn Validation
 # =========================================================
 
-if submit:
+# if submit:
+#     if(
+#         not full_name.strip()
+#         or not email.strip()
+#         or gender== "Select"
+#         or marital_status=="Select"
+    # )
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     st.success("Registration submitted successfully!")
+    st.switch_page("login.py")
