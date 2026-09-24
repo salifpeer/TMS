@@ -14,6 +14,32 @@ st.set_page_config(
 
 
 # =========================================================
+# CUSTOM CSS
+# =========================================================
+
+st.markdown("""
+<style>
+
+div[data-testid="stFormSubmitButton"] > button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+div[data-testid="stFormSubmitButton"] > button:hover {
+    background-color: #45a049;
+    color: white;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+
+# =========================================================
 # PAGE HEADER
 # =========================================================
 
@@ -37,10 +63,6 @@ with st.form("employee_registration_form"):
     st.subheader("1. Personal Details")
 
     with st.container(border=True):
-
-        # ---------------------------------------------
-        # Profile photo + basic information
-        # ---------------------------------------------
 
         photo_col, details_col = st.columns([1, 3])
 
@@ -66,14 +88,14 @@ with st.form("employee_registration_form"):
             with col1:
 
                 full_name = st.text_input(
-                    "Full Name *",
+                    "Full Name",
                     placeholder="Enter your full name"
                 )
 
             with col2:
 
                 email = st.text_input(
-                    "Email *",
+                    "Email",
                     placeholder="example@email.com"
                 )
 
@@ -82,7 +104,7 @@ with st.form("employee_registration_form"):
             with col1:
 
                 date_of_birth = st.date_input(
-                    "Date of Birth *",
+                    "Date of Birth",
                     value=date(2000, 1, 1),
                     min_value=date(1950, 1, 1),
                     max_value=date.today()
@@ -91,13 +113,12 @@ with st.form("employee_registration_form"):
             with col2:
 
                 gender = st.selectbox(
-                    "Gender *",
+                    "Gender",
                     [
                         "Select",
                         "Female",
                         "Male",
-                        "Other",
-                    
+                        "Other"
                     ]
                 )
 
@@ -110,8 +131,7 @@ with st.form("employee_registration_form"):
                     [
                         "Select",
                         "Single",
-                        "Married",
-                    
+                        "Married"
                     ]
                 )
 
@@ -131,16 +151,12 @@ with st.form("employee_registration_form"):
 
     with st.container(border=True):
 
-        # ---------------------------------------------
-        # Contact
-        # ---------------------------------------------
-
         col1, col2 = st.columns(2)
 
         with col1:
 
             mobile = st.text_input(
-                "Mobile Number *",
+                "Mobile Number",
                 placeholder="Enter 10-digit mobile number"
             )
 
@@ -151,20 +167,13 @@ with st.form("employee_registration_form"):
                 placeholder="Enter alternate number"
             )
 
-
-        # ---------------------------------------------
-        # Present Address
-        # ---------------------------------------------
-
         st.write("Present Address")
 
         present_address = st.text_area(
             "Present Address",
             placeholder="Enter your complete address",
-           
+            label_visibility="collapsed"
         )
-
-       
 
 
     # =====================================================
@@ -175,28 +184,18 @@ with st.form("employee_registration_form"):
 
     with st.container(border=True):
 
-        # ---------------------------------------------
-        # Highest qualification
-        # ---------------------------------------------
-
         highest_qualification = st.selectbox(
-            "Highest Qualification *",
+            "Highest Qualification",
             [
                 "Select",
                 "10th",
                 "12th",
                 "Bachelor's Degree",
-                "Master's Degree",
-                
+                "Master's Degree"
             ]
         )
 
-
-        # ---------------------------------------------
-        # School details
-        # ---------------------------------------------
-
-        col1, col2, = st.columns(2)
+        col1, col2 = st.columns(2)
 
         with col1:
 
@@ -216,11 +215,6 @@ with st.form("employee_registration_form"):
                 step=0.1
             )
 
-
-        # ---------------------------------------------
-        # Higher education
-        # ---------------------------------------------
-
         st.write("Higher Education")
 
         col1, col2 = st.columns(2)
@@ -239,7 +233,6 @@ with st.form("employee_registration_form"):
                 placeholder="e.g. Computer Science, AI/ML"
             )
 
-
         col1, col2 = st.columns(2)
 
         with col1:
@@ -257,7 +250,6 @@ with st.form("employee_registration_form"):
                 value=date.today().year,
                 step=1
             )
-
 
         col1, col2 = st.columns(2)
 
@@ -300,173 +292,9 @@ with st.form("employee_registration_form"):
 
 
 # =========================================================
-# FORM SUBMISSION
+# SIMPLE FRONTEND RESPONSE
 # =========================================================
 
 if submit:
 
-    errors = []
-
-
-    # ---------------------------------------------
-    # Basic validation
-    # ---------------------------------------------
-
-    if not full_name.strip():
-
-        errors.append(
-            "Full Name is required."
-        )
-
-
-    if not email.strip():
-
-        errors.append(
-            "Email is required."
-        )
-
-
-    if not mobile.strip():
-
-        errors.append(
-            "Mobile Number is required."
-        )
-
-
-    if gender == "Select":
-
-        errors.append(
-            "Please select Gender."
-        )
-
-
-    if highest_qualification == "Select":
-
-        errors.append(
-            "Please select Highest Qualification."
-        )
-
-
-    if not photo:
-
-        errors.append(
-            "Please upload a profile photo."
-        )
-
-
-
-        # -----------------------------------------
-        # Data structure
-        # -----------------------------------------
-
-        employee_data = {
-
-            "personal_details": {
-
-                "full_name": full_name,
-
-                "email": email,
-
-                "date_of_birth": str(
-                    date_of_birth
-                ),
-
-                "gender": gender,
-
-                "marital_status": marital_status,
-
-                "nationality": nationality
-            },
-
-
-            "contact_address": {
-
-                "mobile": mobile,
-
-                "alternate_mobile": alternate_mobile,
-
-                "present_address": present_address,
-
-                "present_city": present_city,
-
-                "present_state": present_state,
-
-                "present_pincode": present_pincode,
-
-                "permanent_address": permanent_address,
-
-                "permanent_city": permanent_city,
-
-                "permanent_state": permanent_state,
-
-                "permanent_pincode": permanent_pincode
-            },
-
-
-            "education": {
-
-                "highest_qualification":
-                    highest_qualification,
-
-                "tenth_percentage":
-                    tenth_percentage,
-
-                "twelfth_percentage":
-                    twelfth_percentage,
-
-                "twelfth_stream":
-                    twelfth_stream,
-
-                "degree":
-                    degree,
-
-                "specialization":
-                    specialization,
-
-                "university":
-                    university,
-
-                "passing_year":
-                    passing_year,
-
-                "graduation_percentage":
-                    graduation_percentage
-            }
-        }
-
-
-        # -----------------------------------------
-        # Success message
-        # -----------------------------------------
-
-        st.success(
-            "Registration completed successfully!"
-        )
-
-
-        # -----------------------------------------
-        # Temporary preview
-        #
-        # Later this will be replaced with
-        # requests.post() to FastAPI.
-        # -----------------------------------------
-
-        with st.expander(
-            "Preview Submitted Data"
-        ):
-
-            st.json(employee_data)
-
-
-        # -----------------------------------------
-        # Show uploaded photo
-        # -----------------------------------------
-
-        if photo:
-
-            st.write("Profile Photo")
-
-            st.image(
-                photo,
-                width=150
-            )
+    st.success("Registration submitted successfully!")
