@@ -1,22 +1,36 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
 
-from services.attendance import check_in, get_attendance
-
-
-router = APIRouter(prefix="/attendance", tags=["attendance"])
+from services import attendance
 
 
-class CheckInRequest(BaseModel):
-    employee_id: str
-    employee_name: str
+router = APIRouter()
+
 
 
 @router.post("/checkin")
-def checkin(request: CheckInRequest) -> dict:
-    return check_in(request.employee_id, request.employee_name)
+def checkin(employee_id: str):
+
+    return attendance.checkin(employee_id)
 
 
-@router.get("")
-def attendance_records() -> list[dict]:
-    return get_attendance()
+
+@router.post("/checkout")
+def checkout(employee_id: str):
+
+    return attendance.checkout(employee_id)
+
+
+
+@router.post("/break/start")
+def take_break(employee_id: str):
+
+    return attendance.start_break(employee_id)
+
+
+# RESUME BREAK
+@router.post("/break/resume")
+def resume_break(employee_id: str):
+
+    return attendance.resume_break(employee_id)
+
+
