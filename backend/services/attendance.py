@@ -16,7 +16,7 @@ def checkin(employee_id):
 
     employee = data[employee_id]
 
-    
+    # Already checked in
     if employee["checkins"]:
 
         return {
@@ -51,7 +51,7 @@ def checkout(employee_id):
 
     employee = data[employee_id]
 
-
+    # Employee has not checked in
     if not employee["checkins"]:
 
         return {
@@ -61,7 +61,7 @@ def checkout(employee_id):
             "checkout_time": "-"
         }
 
-    
+    # Employee has already checked out
     if employee["checkouts"]:
 
         return {
@@ -71,7 +71,7 @@ def checkout(employee_id):
             "checkout_time": employee["checkouts"][0]
         }
 
-    
+    # Employee is currently on break
     if len(employee["break_starts"]) > len(employee["break_resumes"]):
 
         return {
@@ -142,7 +142,7 @@ def start_break(employee_id):
 
     employee = data[employee_id]
 
-    
+    # Employee has not checked in
     if not employee["checkins"]:
 
         return {
@@ -152,7 +152,7 @@ def start_break(employee_id):
             "checkout_time": "-"
         }
 
-    
+    # Employee has already checked out
     if employee["checkouts"]:
 
         return {
@@ -162,7 +162,7 @@ def start_break(employee_id):
             "checkout_time": employee["checkouts"][0]
         }
 
-    
+    # Employee is already on break
     if len(employee["break_starts"]) > len(employee["break_resumes"]):
 
         return {
@@ -195,7 +195,7 @@ def resume_break(employee_id):
 
     employee = data[employee_id]
 
-    
+    # Employee is not on break
     if len(employee["break_starts"]) == len(employee["break_resumes"]):
 
         return {
