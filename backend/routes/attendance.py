@@ -27,7 +27,7 @@ def take_break(employee_id: str):
     return attendance.start_break(employee_id)
 
 
-# RESUME BREAK
+
 @router.post("/break/resume")
 def resume_break(employee_id: str):
 
