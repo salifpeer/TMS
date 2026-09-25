@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel, Field, field_validator
 from datetime import date
 from uuid import uuid4
+from services.registerservice import register_employee_service
 
 
 # Create router
@@ -10,10 +11,6 @@ router = APIRouter(
     tags=["Registration"]
 )
 
-
-# =========================================================
-# Pydantic Model / Validation
-# =========================================================
 
 class EmployeeRegistration(BaseModel):
 
@@ -54,10 +51,6 @@ class EmployeeRegistration(BaseModel):
     )
 
 
-    # -----------------------------------------------------
-    # Email validation
-    # -----------------------------------------------------
-
     @field_validator("email")
     @classmethod
     def validate_email(cls, value):
@@ -72,10 +65,6 @@ class EmployeeRegistration(BaseModel):
 
         return value
 
-
-    # -----------------------------------------------------
-    # Mobile number validation
-    # -----------------------------------------------------
 
     @field_validator("mobile", "alternate_mobile")
     @classmethod
@@ -94,19 +83,13 @@ class EmployeeRegistration(BaseModel):
         return value
 
 
-# =========================================================
-# Registration Route
-# =========================================================
-
-@router.post("/")
+@router.post("/employee")
 def register_employee(employee: EmployeeRegistration):
 
-    # Later, this route will call the service layer.
-    # Example:
-    #
-    # return register_employee_service(employee)
+    return register_employee_service(employee)
 
-    return {
-        "message": "Employee registration request received",
-        "employee": employee
-    }
+
+
+
+
+

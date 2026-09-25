@@ -1,9 +1,10 @@
 import streamlit as st
+import requests
 from datetime import date
 
-# =========================================================
-# PAGE CONFIG
-# =========================================================
+BACKEND_URL = "http://127.0.0.1:8000/register/employee"
+
+
 
 st.set_page_config(
     page_title="Employee Registration",
@@ -11,25 +12,16 @@ st.set_page_config(
     layout="wide"
 )
 
-# =========================================================
-# PAGE HEADER
-# =========================================================
-
 st.title("Employee Registration")
 
 st.caption(
     "Please enter your details to create your employee profile."
 )
 
-# =========================================================
-# REGISTRATION FORM
-# =========================================================
 
 with st.form("employee_registration_form"):
 
-    # =====================================================
-    # 1. PERSONAL DETAILS
-    # =====================================================
+
 
     st.subheader("1. Personal Details")
 
@@ -95,10 +87,6 @@ with st.form("employee_registration_form"):
             )
 
 
-    # =====================================================
-    # 2. CONTACT & ADDRESS DETAILS
-    # =====================================================
-
     st.subheader("2. Contact & Address Details")
 
     with st.container(border=True):
@@ -128,10 +116,6 @@ with st.form("employee_registration_form"):
         )
 
 
-    # =====================================================
-    # SUBMIT BUTTON
-    # =====================================================
-
     st.write("")
 
     col1, col2, col3 = st.columns([1, 1, 1])
@@ -143,10 +127,6 @@ with st.form("employee_registration_form"):
             width="stretch",
             type="primary"
         )
-
-# =========================================================
-# Form Validation
-# =========================================================
 
 if submit:
 
@@ -187,6 +167,45 @@ if submit:
 
     # Everything is valid
     else:
-        st.success(
-            "Registration submitted successfully!"
-        )
+        payload = {
+            "full_name": full_name,
+            "email": email,
+            "date_of_birth": str(date_of_birth),
+            "gender": gender,
+            "marital_status": marital_status,
+            "nationality": nationality,
+            "mobile": mobile,
+            "alternate_mobile": alternate_mobile,
+            "present_address": present_address
+        }
+
+        # Prevent duplicate HTTP POST requests on Streamlit reruns
+        if st.session_state.get("last_submit_payload") != payload:
+            try:
+                response = requests.post(BACKEND_URL, json=payload)
+                try:
+                    res_data = response.json()
+                except Exception:
+                    res_data = {}
+
+                st.session_state["last_submit_payload"] = payload
+                st.session_state["last_submit_status"] = response.status_code
+                st.session_state["last_submit_data"] = res_data
+            except requests.exceptions.ConnectionError:
+                st.session_state["last_submit_payload"] = payload
+                st.session_state["last_submit_status"] = 503
+                st.session_state["last_submit_data"] = {"detail": "Unable to connect to backend server."}
+            except Exception as e:
+                st.session_state["last_submit_payload"] = payload
+                st.session_state["last_submit_status"] = 500
+                st.session_state["last_submit_data"] = {"detail": f"An unexpected error occurred: {e}"}
+
+        # Render user-friendly status message only (no raw JSON)
+        status_code = st.session_state.get("last_submit_status")
+        res_data = st.session_state.get("last_submit_data", {})
+
+        if status_code == 200:
+            st.success(res_data.get("message", "Employee registered successfully!"))
+        else:
+            error_msg = res_data.get("detail", "Registration failed.")
+            st.error(error_msg)
