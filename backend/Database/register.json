@@ -1,0 +1,38 @@
+[
+    {
+        "employee_id": "e695ef14-7eb2-46f6-aa27-8da79c3236d5",
+        "full_name": "Test User",
+        "email": "test@example.com",
+        "date_of_birth": "2000-01-01",
+        "gender": "Male",
+        "marital_status": "Single",
+        "nationality": "Indian",
+        "mobile": "1234567890",
+        "alternate_mobile": "0987654321",
+        "present_address": "123 Test Street"
+    },
+    {
+        "employee_id": "7ec13522-8f68-4b56-b0b3-01ec4e4ca651",
+        "full_name": "Banday_ Sameehah",
+        "email": "bandaysameehah@gmail.com",
+        "date_of_birth": "2000-01-01",
+        "gender": "Female",
+        "marital_status": "Single",
+        "nationality": "Indian",
+        "mobile": "9419054810",
+        "alternate_mobile": "9419054810",
+        "present_address": "bemina"
+    },
+    {
+        "employee_id": "bff94517-4da5-4888-b111-d5e8cc6ce694",
+        "full_name": "Banday_ Sameehah",
+        "email": "bandaysameeha01h@gmail.com",
+        "date_of_birth": "2000-01-01",
+        "gender": "Female",
+        "marital_status": "Single",
+        "nationality": "Indian",
+        "mobile": "9419054810",
+        "alternate_mobile": "9419054810",
+        "present_address": "bemina"
+    }
+]
