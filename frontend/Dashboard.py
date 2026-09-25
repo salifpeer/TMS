@@ -174,7 +174,7 @@ with col2:
 
 
 
-st.subheader("Check-in and check-out Details Report")
+    st.subheader("Check-in and check-out Details Report")
 
 
 cont1 = st.container(border=True)
@@ -188,26 +188,26 @@ with cont1:
         [2, 2, 2, 2, 1.5, 2.5, 2.5]
     )
 
-    with col1:
-        st.write("Check Out")
+        with col1:
+            st.write("Check Out")
 
-    with col2:
-        st.write("Take Break")
+        with col2:
+            st.write("Take Break")
 
-    with col3:
-        st.write("Resume Work")
+        with col3:
+            st.write("Resume Work")
 
-    with col4:
-        st.write("Name")
+        with col4:
+            st.write("Name")
 
-    with col5:
-        st.write("Status")
+        with col5:
+            st.write("Status")
 
-    with col6:
-        st.write("Check-In Time")
+        with col6:
+            st.write("Check-In Time")
 
-    with col7:
-        st.write("Check-Out Time")
+        with col7:
+            st.write("Check-Out Time")
 
 
     # ---------------- DATA ----------------
