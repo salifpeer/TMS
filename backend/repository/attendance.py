@@ -6,3 +6,4 @@ def load_attendance():
 def save_attendance(data):
     with open("./Database/attendace.json","w") as f:
         json.dump(data,f)
+
