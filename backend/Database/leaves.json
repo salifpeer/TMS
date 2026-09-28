@@ -1,0 +1,30 @@
+{
+    "CBXNS381": [
+        {
+            "start_date": "2026-09-28",
+            "end_date": "2026-09-28",
+            "reason": "Medical appointment",
+            "total_leave_days": 1
+        },
+        {
+            "start_date": "2026-10-05",
+            "end_date": "2026-10-07",
+            "reason": "Family function",
+            "total_leave_days": 3
+        },
+        {
+            "start_date": "2026-09-28",
+            "end_date": "2026-09-28",
+            "reason": "io;,l;",
+            "total_leave_days": 1
+        }
+    ],
+    "ABC1234": [
+        {
+            "start_date": "2026-10-10",
+            "end_date": "2026-10-11",
+            "reason": "Personal work",
+            "total_leave_days": 2
+        }
+    ]
+}
