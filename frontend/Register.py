@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 from datetime import date
-from sign_in from frontend
+# from frontend import sign_in
 
 def register():
     BACKEND_URL = "http://127.0.0.1:8000/register/employee"
@@ -222,7 +222,7 @@ def register():
 
             if status_code == 200:
                 st.success(res_data.get("message", "Employee registered successfully!"))
-                sign_in()
+                # sign_in()
             else:
                 error_msg = res_data.get("detail", "Registration failed.")
                 st.error(error_msg)
