@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "mehr12@gmail.com",
+      "name": "Mehr Ali",
+      "password": "mehr12"
+    },
+    {
+      "id": 2,
+      "email": "mehr22@gmail.com",
+      "name": "Mehr Khan",
+      "password": "mehr22"
+    },
+    {
+      "id": 3,
+      "email": "mehr33@hotmail.com",
+      "name": "Mehr Fatima",
+      "password": "mehr33"
+    }
+  ]
+}
