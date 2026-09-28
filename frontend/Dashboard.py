@@ -1,390 +1,76 @@
-import streamlit as st
+"""
+Placeholder dashboard.
+
+The real one is being built by the other team member. When their file is
+ready, drop it in as dashboard.py. The only thing login.py needs from it is a
+function called dashboard() that takes no arguments, and the token waiting in
+st.session_state["token"].
+"""
+
+import os
+import sys
+
 import requests
+import streamlit as st
 
+FRONTEND_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(FRONTEND_DIR)
 
-URL = "http://127.0.0.1:8000"
+for _path in (PROJECT_ROOT, FRONTEND_DIR):
+    if _path not in sys.path:
+        sys.path.insert(0, _path)
 
+from backend.api.client import get_current_user  # noqa: E402
 
-if "attendance" not in st.session_state:
+LOGO_PATH = os.path.join(FRONTEND_DIR, "logo.png")
 
-    st.session_state.attendance = {
-        "status": "-",
-        "checkin_time": "-",
-        "checkout_time": "-"
-    }
 
+def sign_out():
+    """Drop the token and go back to the sign in page."""
+    st.session_state.pop("token", None)
+    st.session_state.pop("email", None)
+    st.session_state["page"] = "login"
+    st.rerun()
 
 
-def checkin():
+def dashboard():
 
-    employee_id = st.session_state.employee_id
+    token = st.session_state.get("token")
 
-    response = requests.post(
-        f"{URL}/checkin",
-        params={
-            "employee_id": employee_id
-        }
-    )
+    # Somebody landed here without signing in.
+    if not token:
+        st.warning("Please sign in first.")
+        st.session_state["page"] = "login"
+        st.rerun()
+        return
 
-    data = response.json()
+    # The page does not trust the session, it asks the API to confirm the
+    # token on every load. An expired or edited token gets kicked out here.
+    try:
+        response = get_current_user(token)
+    except requests.exceptions.RequestException:
+        st.error("Could not reach the server. Is the backend still running?")
+        return
 
-    
-    st.session_state.attendance = data
+    if response.status_code == 401:
+        st.error("Your session has expired. Please sign in again.")
+        if st.button("Back to Sign In"):
+            sign_out()
+        return
 
-    st.toast(
-        data["message"],
-        icon="✅"
-    )
+    if response.status_code != 200:
+        st.error(f"Could not load your profile: {response.status_code}")
+        return
 
+    user = response.json()
 
+    st.image(LOGO_PATH, width=150)
+    st.title("Dashboard")
+    st.success(f"Welcome to the dashboard, {user['email']}")
 
+    st.write("")
+    st.write("This is a placeholder page while the real dashboard is built.")
 
-def checkout():
-
-    employee_id = st.session_state.employee_id
-
-    response = requests.post(
-        f"{URL}/checkout",
-        params={
-            "employee_id": employee_id
-        }
-    )
-
-    data = response.json()
-
-
-    st.session_state.attendance = data
-
-    st.toast(
-        data["message"],
-        icon="✅"
-    )
-
-
-
-
-def take_break():
-
-    employee_id = st.session_state.employee_id
-
-    response = requests.post(
-        f"{URL}/break/start",
-        params={
-            "employee_id": employee_id
-        }
-    )
-
-    data = response.json()
-
-    
-    st.session_state.attendance = data
-
-    st.toast(
-        data["message"],
-        icon="☕"
-    )
-
-
-
-
-def resume_break():
-
-    employee_id = st.session_state.employee_id
-
-    response = requests.post(
-        f"{URL}/break/resume",
-        params={
-            "employee_id": employee_id
-        }
-    )
-
-    data = response.json()
-
-
-    st.session_state.attendance = data
-
-    st.toast(
-        data["message"],
-        icon="▶️"
-    )
-
-
-
-
-tab1, tab2, tab3 = st.tabs(
-    ["My Dashboard", "Details", "Leaves"]
-)
-
-with tab2:
-    st.header("My personal Details")    
-
-    response = requests.get(
-        f"{URL}/details",
-        params={
-            "employee_id": "CBXNS381"
-        }
-    )
-
-    if response.status_code == 200:
-
-        details = response.json()
-
-        if details:
-
-            st.dataframe(
-                details,
-                use_container_width=True,
-                hide_index=True
-            )
-
-        else:
-
-            st.info("No details found.")
-
-    else:
-
-        st.error("Unable to fetch details.")
-with tab3:
-
-    st.header("Apply for Leave")
-
-    leave_type = st.radio(
-        "Select Leave Type",
-        ["One Day Leave", "Multiple Days Leave"]
-    )
-
-    if leave_type == "One Day Leave":
-
-        leave_date = st.date_input("Leave Date")
-
-        start_date = leave_date
-        end_date = leave_date
-
-    else:
-
-        start_date = st.date_input("Starting Date")
-        end_date = st.date_input("Ending Date")
-
-    reason = st.text_area(
-        "Reason for Leave"
-    )
-
-    if st.button("Apply Leave", type="primary"):
-
-        if not reason:
-            st.warning("Please enter a reason")
-
-        elif end_date < start_date:
-            st.warning("Ending date cannot be before starting date")
-
-        else:
-
-            response = requests.post(
-                f"{URL}/leave",
-                json={
-                    "employee_id":"CBXNS381" ,
-                    "start_date": str(start_date),
-                    "end_date": str(end_date),
-                    "reason": reason
-                }
-            )
-
-            data = response.json()
-
-            st.success(data["message"])
-
-
-    st.divider()
-
-    st.subheader("My Leave Applications")
-
-    
-
-    response = requests.get(
-        f"{URL}/leaves",
-        params={
-            "employee_id": "CBXNS381"
-        }
-    )
-
-    if response.status_code == 200:
-
-        leaves = response.json()
-
-        if leaves:
-
-            st.dataframe(
-                leaves,
-                use_container_width=True,
-                hide_index=True
-            )
-
-        else:
-
-            st.info("No leave applications found.")
-
-    else:
-
-        st.error("Unable to fetch leave applications.")
-
-
-
-with st.sidebar:
-
-    col1, col2, col3 = st.columns([1, 4, 1])
-
-    with col2:
-
-        st.title("My Dashboard")
-
-        st.image(
-            "https://th.bing.com/th/id/OIP.G37tgeQqSNt7v2oPfj9ltQHaE7?w=205&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&pid=1.7&rm=3",
-            width=100
-        )
-
-        st.write("Name")
-        st.write("ID")
-        st.write("Email")
-
-        st.button(
-            "Sign out",
-            type="primary"
-        )
-
-with tab1:
-    col1, con, col2 = st.columns([3, 3, 3])
-
-
-    with col1:
-
-        st.button(
-            "Apply Leave",
-            width=100,
-            type="primary"
-        )
-
-
-    with con:
-
-        st.button(
-            "Check In",
-            type="primary",
-            width=100,
-            on_click=checkin
-        )
-
-
-    with col2:
-
-        st.button(
-            "Apply WFH",
-            width=100,
-            type="primary"
-        )
-
-
-    st.subheader("Check-in and check-out Details Report")
-
-    cont1 = st.container(border=True)
-
-
-    with cont1:
-
-        
-
-        col1, col2, col3, col4, col5, col6, col7 = st.columns(
-            [2, 2, 2, 2, 1.5, 2.5, 2.5]
-        )
-
-        with col1:
-                st.write("Check Out")
-
-        with col2:
-                st.write("Take Break")
-
-        with col3:
-                st.write("Resume Work")
-
-        with col4:
-                st.write("Name")
-
-        with col5:
-                st.write("Status")
-
-        
-        with col6:
-                st.write("Check-In Time")
-
-        with col7:
-                st.write("Check-Out Time")
-
-        col1, col2, col3, col4, col5, col6, col7 = st.columns(
-            [2, 2, 2, 2, 1.5, 2.5, 2.5]
-        )
-
-
-        
-        with col1:
-
-            st.button(
-                "Check Out",
-                on_click=checkout,
-                key="checkout_button"
-            )
-
-
-        
-
-        with col2:
-
-            st.button(
-                "Take Break",
-                on_click=take_break,
-                key="break_button"
-            )
-
-
-        
-
-        with col3:
-
-            st.button(
-                "Resume",
-                on_click=resume_break,
-                key="resume_button"
-            )
-
-
-        
-
-        with col4:
-
-            st.write("CBXNS381 - Salif Peer")
-
-
-
-
-        with col5:
-
-            st.write(
-                st.session_state.attendance["status"]
-            )
-
-
-        
-
-        with col6:
-
-            st.write(
-                st.session_state.attendance["checkin_time"]
-            )
-
-        with col7:
-
-            st.write(
-                st.session_state.attendance["checkout_time"]
-            )
-    st.toast(
-            "Attendance data updated successfully!",
-            icon="✅"
-        )
+    st.write("")
+    if st.button("Sign Out", type="primary"):
+        sign_out()

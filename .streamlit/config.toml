@@ -1,0 +1,10 @@
+# Project level Streamlit settings.
+
+[browser]
+# Do not send usage stats, and skip the email prompt on first run.
+gatherUsageStats = false
+
+[server]
+port = 8501
+# Restart the app when a file is saved, same idea as uvicorn --reload.
+runOnSave = true
