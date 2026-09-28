@@ -112,5 +112,31 @@
         "present_address": "rangreth",
         "password": "hello909",
         "employee_id": "9474f7ef-aec2-4e98-b0cc-2f92ecc82962"
+    },
+    "b5ce2913-f71e-44e9-99b7-91936aa3778b": {
+        "full_name": "testing hello",
+        "email": "test@gmail.com",
+        "date_of_birth": "2000-01-19",
+        "gender": "Male",
+        "marital_status": "Married",
+        "nationality": "Indian",
+        "mobile": "1234567890",
+        "alternate_mobile": "1234567890",
+        "present_address": "irelandy",
+        "password": "yuck",
+        "employee_id": "b5ce2913-f71e-44e9-99b7-91936aa3778b"
+    },
+    "4458e047-1b2b-472d-879d-770093c475a8": {
+        "full_name": "Banday_ Sameehah",
+        "email": "bandayy@gmail.com",
+        "date_of_birth": "2000-01-01",
+        "gender": "Male",
+        "marital_status": "Single",
+        "nationality": "Indian",
+        "mobile": "1234567890",
+        "alternate_mobile": "1234567890",
+        "present_address": "harwan",
+        "password": "mehr25",
+        "employee_id": "4458e047-1b2b-472d-879d-770093c475a8"
     }
 }
