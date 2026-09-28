@@ -1,11 +1,9 @@
 from fastapi import APIRouter
 from pydantic import BaseModel, Field, field_validator
 from datetime import date
-from uuid import uuid4
 from services.registerservice import register_employee_service
 
 
-# Create router
 router = APIRouter(
     prefix="/register",
     tags=["Registration"]
@@ -14,17 +12,12 @@ router = APIRouter(
 
 class EmployeeRegistration(BaseModel):
 
-    # Automatically generated unique ID
-    employee_id: str = Field(
-        default_factory=lambda: str(uuid4())
-    )
-
     full_name: str = Field(
         min_length=2,
         max_length=100
     )
 
-    email: str
+    email: str 
 
     date_of_birth: date
 
@@ -50,11 +43,11 @@ class EmployeeRegistration(BaseModel):
         max_length=300
     )
 
+    password: str
 
     @field_validator("email")
     @classmethod
     def validate_email(cls, value):
-
         if (
             "@" not in value
             or "." not in value
@@ -62,34 +55,22 @@ class EmployeeRegistration(BaseModel):
             or value.endswith("@")
         ):
             raise ValueError("Please enter a valid email address.")
-
         return value
-
 
     @field_validator("mobile", "alternate_mobile")
     @classmethod
     def validate_mobile(cls, value):
-
         if not value.isdigit():
             raise ValueError(
                 "Mobile number must contain only digits."
             )
-
         if len(value) != 10:
             raise ValueError(
                 "Mobile number must contain exactly 10 digits."
             )
-
         return value
 
 
 @router.post("/employee")
 def register_employee(employee: EmployeeRegistration):
-
     return register_employee_service(employee)
-
-
-
-
-
-

@@ -1,5 +1,5 @@
-[
-    {
+{
+    "e695ef14-7eb2-46f6-aa27-8da79c3236d5": {
         "employee_id": "e695ef14-7eb2-46f6-aa27-8da79c3236d5",
         "full_name": "Test User",
         "email": "test@example.com",
@@ -11,7 +11,7 @@
         "alternate_mobile": "0987654321",
         "present_address": "123 Test Street"
     },
-    {
+    "7ec13522-8f68-4b56-b0b3-01ec4e4ca651": {
         "employee_id": "7ec13522-8f68-4b56-b0b3-01ec4e4ca651",
         "full_name": "Banday_ Sameehah",
         "email": "bandaysameehah@gmail.com",
@@ -23,7 +23,7 @@
         "alternate_mobile": "9419054810",
         "present_address": "bemina"
     },
-    {
+    "bff94517-4da5-4888-b111-d5e8cc6ce694": {
         "employee_id": "bff94517-4da5-4888-b111-d5e8cc6ce694",
         "full_name": "Banday_ Sameehah",
         "email": "bandaysameeha01h@gmail.com",
@@ -34,5 +34,83 @@
         "mobile": "9419054810",
         "alternate_mobile": "9419054810",
         "present_address": "bemina"
+    },
+    "173744ce-39a5-42d1-84ac-b4ef23ba88dd": {
+        "employee_id": "173744ce-39a5-42d1-84ac-b4ef23ba88dd",
+        "full_name": "john",
+        "email": "john@gmail.com",
+        "date_of_birth": "2000-01-07",
+        "gender": "Male",
+        "marital_status": "Single",
+        "nationality": "Indian",
+        "mobile": "1234567890",
+        "alternate_mobile": "1234567890",
+        "present_address": "rajabagh",
+        "password": "password123"
+    },
+    "6e54fafb-c681-4b00-855e-32782c800fcf": {
+        "employee_id": "6e54fafb-c681-4b00-855e-32782c800fcf",
+        "full_name": "raj",
+        "email": "raj@gmail.com",
+        "date_of_birth": "2000-01-07",
+        "gender": "Male",
+        "marital_status": "Married",
+        "nationality": "Indian",
+        "mobile": "1234567890",
+        "alternate_mobile": "1234567890",
+        "present_address": "bemina",
+        "password": "password123"
+    },
+    "1234ee": {
+        "employee_id": "1234ee",
+        "full_name": "sam",
+        "email": "straw@gmai.com",
+        "date_of_birth": "2026-09-28",
+        "gender": "female",
+        "marital_status": "married",
+        "nationality": "indian",
+        "mobile": "2345678901",
+        "alternate_mobile": "1234567890",
+        "present_address": "rajbagh",
+        "password": "hello123"
+    },
+    "33678b78-78e3-461c-9560-50e163cdba1e": {
+        "employee_id": "33678b78-78e3-461c-9560-50e163cdba1e",
+        "full_name": "sam",
+        "email": "string@gmail.com",
+        "date_of_birth": "2026-09-28",
+        "gender": "male",
+        "marital_status": "single",
+        "nationality": "string",
+        "mobile": "1234567890",
+        "alternate_mobile": "1234567890",
+        "present_address": "bemina",
+        "password": "hell654"
+    },
+    "ca7a4c9b-6a5d-4f70-b024-8bd7cf7f1d4a": {
+        "full_name": "aqsa",
+        "email": "aqsa@gmail.com",
+        "date_of_birth": "2026-09-28",
+        "gender": "male",
+        "marital_status": "single",
+        "nationality": "indian",
+        "mobile": "1223456789",
+        "alternate_mobile": "1234567890",
+        "present_address": "rangreth",
+        "password": "rangreth",
+        "employee_id": "ca7a4c9b-6a5d-4f70-b024-8bd7cf7f1d4a"
+    },
+    "9474f7ef-aec2-4e98-b0cc-2f92ecc82962": {
+        "full_name": "sameehah",
+        "email": "regex@gmail.com",
+        "date_of_birth": "2000-01-01",
+        "gender": "Female",
+        "marital_status": "Married",
+        "nationality": "Indian",
+        "mobile": "1234567890",
+        "alternate_mobile": "1234567890",
+        "present_address": "rangreth",
+        "password": "hello909",
+        "employee_id": "9474f7ef-aec2-4e98-b0cc-2f92ecc82962"
     }
-]
+}

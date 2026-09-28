@@ -1,3 +1,4 @@
+from uuid import uuid4
 from fastapi import HTTPException
 from repository.registerrepo import (
     load_employees,
@@ -7,28 +8,35 @@ from repository.registerrepo import (
 
 def register_employee_service(employee):
 
-    # Convert Pydantic model into dictionary
     employee_data = employee.model_dump(mode="json")
 
-    # Load existing employees
     employees = load_employees()
 
-    # Check if email already exists
+    # Handle backward compatibility if database was loaded as a list
+    if isinstance(employees, list):
+        emp_dict = {}
+        for emp in employees:
+            if isinstance(emp, dict):
+                emp_id = emp.get("employee_id", str(uuid4()))
+                emp["employee_id"] = emp_id
+                emp_dict[emp_id] = emp
+        employees = emp_dict
+
     new_email = employee_data.get("email", "").strip().lower()
-    for existing_emp in employees:
-        if existing_emp.get("email", "").strip().lower() == new_email:
+    for existing_emp in employees.values():
+        if isinstance(existing_emp, dict) and existing_emp.get("email", "").strip().lower() == new_email:
             raise HTTPException(
                 status_code=400,
                 detail="An account with this email address already exists."
             )
 
-    # Add new employee
-    employees.append(employee_data)
+    employee_id = str(uuid4())
+    employee_data["employee_id"] = employee_id
 
-    # Save updated employee list
+    employees[employee_id] = employee_data
+
     save_employees(employees)
 
-    # Return response
     return {
         "message": "Employee registered successfully",
         "employee": employee_data

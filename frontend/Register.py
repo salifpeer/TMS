@@ -4,8 +4,6 @@ from datetime import date
 
 BACKEND_URL = "http://127.0.0.1:8000/register/employee"
 
-
-
 st.set_page_config(
     page_title="Employee Registration",
     page_icon="👤",
@@ -18,10 +16,7 @@ st.caption(
     "Please enter your details to create your employee profile."
 )
 
-
 with st.form("employee_registration_form"):
-
-
 
     st.subheader("1. Personal Details")
 
@@ -86,7 +81,6 @@ with st.form("employee_registration_form"):
                 value="Indian"
             )
 
-
     st.subheader("2. Contact & Address Details")
 
     with st.container(border=True):
@@ -115,10 +109,31 @@ with st.form("employee_registration_form"):
             label_visibility="collapsed"
         )
 
+    st.subheader("3. Account Security")
+
+    with st.container(border=True):
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+
+            password = st.text_input(
+                "Password",
+                type="password",
+                placeholder="Enter password"
+            )
+
+        with col2:
+
+            confirm_password = st.text_input(
+                "Confirm Password",
+                type="password",
+                placeholder="Re-enter password"
+            )
 
     st.write("")
 
-    col1, col2, col3 = st.columns([1, 1, 1])
+    _, col2, _ = st.columns([1, 1, 1])
 
     with col2:
 
@@ -130,7 +145,6 @@ with st.form("employee_registration_form"):
 
 if submit:
 
-    # Check if any required field is missing
     if (
         not full_name.strip()
         or not email.strip()
@@ -140,10 +154,11 @@ if submit:
         or not mobile.strip()
         or not alternate_mobile.strip()
         or not present_address.strip()
+        or not password
+        or not confirm_password
     ):
         st.error("Please fill all the fields.")
 
-    # Email validation
     elif (
         "@" not in email
         or "." not in email
@@ -152,11 +167,9 @@ if submit:
     ):
         st.error("Please enter a valid email address.")
 
-    # Mobile number validation
     elif not mobile.isdigit() or len(mobile) != 10:
         st.error("Mobile number must contain exactly 10 digits.")
 
-    # Alternate mobile validation
     elif (
         not alternate_mobile.isdigit()
         or len(alternate_mobile) != 10
@@ -165,7 +178,9 @@ if submit:
             "Alternate mobile number must contain exactly 10 digits."
         )
 
-    # Everything is valid
+    elif password != confirm_password:
+        st.error("Passwords do not match.")
+
     else:
         payload = {
             "full_name": full_name,
@@ -176,10 +191,10 @@ if submit:
             "nationality": nationality,
             "mobile": mobile,
             "alternate_mobile": alternate_mobile,
-            "present_address": present_address
+            "present_address": present_address,
+            "password": password
         }
 
-        # Prevent duplicate HTTP POST requests on Streamlit reruns
         if st.session_state.get("last_submit_payload") != payload:
             try:
                 response = requests.post(BACKEND_URL, json=payload)
@@ -200,7 +215,6 @@ if submit:
                 st.session_state["last_submit_status"] = 500
                 st.session_state["last_submit_data"] = {"detail": f"An unexpected error occurred: {e}"}
 
-        # Render user-friendly status message only (no raw JSON)
         status_code = st.session_state.get("last_submit_status")
         res_data = st.session_state.get("last_submit_data", {})
 
