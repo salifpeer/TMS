@@ -71,7 +71,7 @@ def checkout(employee_id):
             "checkout_time": employee["checkouts"][0]
         }
 
-    # Employee is currently on break
+    
     if len(employee["break_starts"]) > len(employee["break_resumes"]):
 
         return {
