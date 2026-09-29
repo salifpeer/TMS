@@ -1,9 +1,3 @@
-"""
-Sign in page. This is the file you run with streamlit.
-
-    streamlit run frontend/login.py
-"""
-
 import os
 import re
 import sys
@@ -20,11 +14,11 @@ for _path in (PROJECT_ROOT, FRONTEND_DIR):
     if _path not in sys.path:
         sys.path.insert(0, _path)
 
-from backend.api.client import login  # noqa: E402
+from backend.api.client import login  
 
-from config import REGISTER_URL  # noqa: E402
-from dashboard import dashboard  # noqa: E402
-from register import register  # noqa: E402
+from config import REGISTER_URL  
+from dashboard import dashboard  
+from register import register  
 
 
 LOGO_PATH = os.path.join(FRONTEND_DIR, "logo.png")
@@ -46,8 +40,6 @@ def sign_in():
 
     if st.button("Sign In", type="primary"):
 
-        # Checked here first so we do not send an obviously bad request.
-        # The API validates the same things again, it never trusts the client.
         if email.strip() == "" or password == "":
             st.error("Please fill in all fields!")
             return
@@ -91,13 +83,9 @@ def sign_in():
             st.error(f"Request failed: {response.status_code}")
 
 
-def register_link():
-    """
-    "Not registered yet" line under the form.
+def register_link(): ###paste link here
+   
 
-    Once the registration link is filled in inside config.py this becomes a
-    real link to your teammate's page. Until then it opens the placeholder.
-    """
     if REGISTER_URL.strip():
         st.markdown(
             f"Not registered yet? [Register here]({REGISTER_URL.strip()})",
@@ -117,7 +105,7 @@ if "page" not in st.session_state:
 if st.session_state["page"] == "login":
 
     sign_in()
-    register_link()
+    register_link()######here also
 
 elif st.session_state["page"] == "register":
 

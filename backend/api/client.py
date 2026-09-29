@@ -1,13 +1,3 @@
-"""
-Thin HTTP client the Streamlit pages use to talk to the API.
-
-Keeping every requests call in one file means the pages never hardcode a URL,
-and when the API moves to a server we only change BASE_URL here.
-
-Each function returns the raw requests.Response so the caller can react to the
-status code itself.
-"""
-
 import os
 
 import requests

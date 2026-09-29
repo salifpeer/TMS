@@ -1,12 +1,3 @@
-"""
-Placeholder registration page.
-
-Registration belongs to the other team member. This file only exists so the
-"Register here" link has somewhere to go while their page is not available.
-Replace this whole file with theirs when it is ready, keeping a function
-called register() so login.py can still call it.
-"""
-
 import os
 
 import streamlit as st

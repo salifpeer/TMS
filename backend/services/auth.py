@@ -1,10 +1,3 @@
-"""
-Auth service: password hashing, password checking and JWT tokens.
-
-Everything security related lives here so the routes stay thin and the
-repository only has to worry about reading data.
-"""
-
 import os
 import hmac
 import hashlib
@@ -16,9 +9,7 @@ import jwt
 from backend.repository.repo import find_user_by_email
 
 
-# --- settings -------------------------------------------------------------
-# In a real deployment these come from the environment (.env / server config).
-# The fallback values are only here so the project runs out of the box.
+
 SECRET_KEY = os.getenv("TMS_SECRET_KEY", "dev-secret-change-me-before-deploy")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("TMS_TOKEN_EXPIRE_MINUTES", "30"))
@@ -39,18 +30,8 @@ def hash_password(plain_password: str) -> str:
 
 
 def verify_password(plain_password: str, stored_password: str) -> bool:
-    """
-    Check a typed password against what is stored.
+   
 
-    Two formats are accepted:
-
-      1. A plain password, which is what the demo accounts in users.json use
-         while registration is still being built.
-      2. A pbkdf2_sha256 hash, which is what registration will write.
-
-    Keeping both means login keeps working on the day the other half of the
-    task lands, without anybody having to touch this file.
-    """
     if not stored_password.startswith("pbkdf2_sha256$"):
         return hmac.compare_digest(plain_password, stored_password)
 

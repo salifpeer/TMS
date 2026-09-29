@@ -1,10 +1,3 @@
-"""
-Login routes.
-
-The route layer only does three things: validate what came in, call the
-service, and turn the result into the right HTTP status code.
-"""
-
 import jwt
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials

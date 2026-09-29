@@ -1,12 +1,3 @@
-"""
-Placeholder dashboard.
-
-The real one is being built by the other team member. When their file is
-ready, drop it in as dashboard.py. The only thing login.py needs from it is a
-function called dashboard() that takes no arguments, and the token waiting in
-st.session_state["token"].
-"""
-
 import os
 import sys
 

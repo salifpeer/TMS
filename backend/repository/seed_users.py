@@ -1,20 +1,3 @@
-"""
-Creates users.json with the demo accounts we are testing login against.
-
-Registration is being built by the other team member, so until their API is
-ready this script is what puts users in the system. Run it from the project
-root:
-
-    python -m backend.repository.seed_users
-
-HASH_PASSWORDS below controls how the passwords are written.
-
-While we are testing it is set to False, so users.json holds short passwords
-you can read and type straight away. Flip it to True and re-run the script to
-write them as salted hashes instead. Login works either way, because
-verify_password handles both formats.
-"""
-
 import json
 
 from backend.services.auth import hash_password
