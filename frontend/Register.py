@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 from datetime import date
+
 # from frontend import sign_in
 
 def register():
@@ -222,7 +223,8 @@ def register():
 
             if status_code == 200:
                 st.success(res_data.get("message", "Employee registered successfully!"))
-                # sign_in()
+                st.session_state.page = "login"
+                st.rerun()
             else:
                 error_msg = res_data.get("detail", "Registration failed.")
                 st.error(error_msg)

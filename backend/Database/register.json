@@ -138,5 +138,31 @@
         "present_address": "harwan",
         "password": "mehr25",
         "employee_id": "4458e047-1b2b-472d-879d-770093c475a8"
+    },
+    "1d9ebb34-c731-4e9e-b2c9-9956bf9cd5fa": {
+        "full_name": "SALIF SAJAD",
+        "email": "SALIFSAJAD1@GMAIL.COM",
+        "date_of_birth": "2000-01-01",
+        "gender": "Male",
+        "marital_status": "Single",
+        "nationality": "Indian",
+        "mobile": "1234567890",
+        "alternate_mobile": "1234567890",
+        "present_address": "ADLASH MAGAM",
+        "password": "4xdte4SQXV-bUG_",
+        "employee_id": "1d9ebb34-c731-4e9e-b2c9-9956bf9cd5fa"
+    },
+    "bb223afa-9140-4e8b-a182-21de319618d0": {
+        "full_name": "SALIF SAJAD",
+        "email": "mmm123@gmail.com",
+        "date_of_birth": "2000-01-01",
+        "gender": "Female",
+        "marital_status": "Married",
+        "nationality": "Indian",
+        "mobile": "1234567890",
+        "alternate_mobile": "1234567890",
+        "present_address": "ADLASH MAGAM",
+        "password": "4xdte4SQXV-bUG_",
+        "employee_id": "bb223afa-9140-4e8b-a182-21de319618d0"
     }
 }
