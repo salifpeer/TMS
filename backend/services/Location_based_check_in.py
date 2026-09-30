@@ -2,8 +2,8 @@ import streamlit as st
 from streamlit_geolocation import streamlit_geolocation
 import math
 
-BUILDING_LAT = 34.00174170304351
-BUILDING_LON = 74.79397420292982
+BUILDING_LAT = 34.001738
+BUILDING_LON = 74.793988
 RADIUS = 100
 
  # before salifs function of check-in is called this will be called first
@@ -68,4 +68,4 @@ def check_location():
         )
 
         return False
-check_location()    
+  

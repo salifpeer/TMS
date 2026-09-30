@@ -1,0 +1,60 @@
+{
+    "EMP001": {
+        "30-Sep-2026": {
+            "status": "Checked In",
+            "checkin": "30-Sep-2026 09:15:20 AM",
+            "checkout": "",
+            "break_starts": [
+                "30-Sep-2026 01:00:00 PM"
+            ],
+            "break_resumes": [
+                "30-Sep-2026 01:30:00 PM"
+            ],
+            "break_duration": "0:30:00",
+            "working_time": ""
+        }
+    },
+    "EMP002": {
+        "30-Sep-2026": {
+            "status": "Checked Out",
+            "checkin": "30-Sep-2026 09:00:10 AM",
+            "checkout": "30-Sep-2026 05:30:25 PM",
+            "break_starts": [
+                "30-Sep-2026 01:00:00 PM"
+            ],
+            "break_resumes": [
+                "30-Sep-2026 01:45:00 PM"
+            ],
+            "break_duration": "0:45:00",
+            "working_time": "7:45:15"
+        }
+    },
+    "EMP003": {
+        "30-Sep-2026": {
+            "status": "On Break",
+            "checkin": "30-Sep-2026 09:30:00 AM",
+            "checkout": "",
+            "break_starts": [
+                "30-Sep-2026 01:15:00 PM"
+            ],
+            "break_resumes": [],
+            "break_duration": "0:00:00",
+            "working_time": ""
+        }
+    },
+    "ca7a4c9b-6a5d-4f70-b024-8bd7cf7f1d4a": {
+        "30-Sep-2026": {
+            "status": "Checked In",
+            "checkin": "10-Sep-2026 09:00:00 AM",
+            "checkout": "",
+            "break_starts": [
+                "30-Sep-2026 12:06:11 PM"
+            ],
+            "break_resumes": [
+                "30-Sep-2026 12:06:18 PM"
+            ],
+            "break_duration": "0:00:07",
+            "working_time": ""
+        }
+    }
+}

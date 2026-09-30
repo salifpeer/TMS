@@ -5,12 +5,15 @@ def dashboard():
     URL = "http://127.0.0.1:8000"
    
     if "attendance" not in st.session_state:
-        
-        st.session_state.attendance = {
-            "status": "-",
-            "checkin_time": "-",
-            "checkout_time": "-"
-        }
+
+      st.session_state.attendance = {
+        "message": "",
+        "status": "-",
+        "checkin_time": "-",
+        "checkout_time": "-",
+        "break_time": "0:00:00",
+        "working_time": "-"
+    }
 
 
 
@@ -24,19 +27,23 @@ def dashboard():
                 "employee_id": employee_id
             }
         )
-        if response.status_code == 400:
-            st.error(
-                "user is not in the office range"
-            )
+
         if response.status_code == 200:
-           data = response.json()
-           st.session_state.attendance = data
-           st.toast(
-            data["message"],
-            icon="✅"
-               )
 
+            data = response.json()
 
+            st.session_state.attendance = data
+
+            st.toast(
+                data["message"],
+                icon="✅"
+            )
+
+        else:
+
+            data = response.json()
+
+            st.error(data.get("detail", "Check-in failed"))
 
 
     def checkout():
@@ -49,21 +56,23 @@ def dashboard():
                 "employee_id": employee_id
             }
         )
-        if response.status_code == 400:
-            st.error(
-                "user is not in the office range"
-            )
-        if response.status_code == 200:
-            data = response.json()
 
+        if response.status_code == 200:
+
+            data = response.json()
 
             st.session_state.attendance = data
 
             st.toast(
-            data["message"],
-            icon="✅"
-        )
+                data["message"],
+                icon="✅"
+            )
 
+        else:
+
+            data = response.json()
+
+            st.error(data.get("detail", "Check-out failed"))
 
 
 
@@ -78,43 +87,49 @@ def dashboard():
             }
         )
 
-        data = response.json()
+        if response.status_code == 200:
 
-        
-        st.session_state.attendance = data
+            data = response.json()
 
-        st.toast(
-            data["message"],
-            icon="☕"
-        )
+            st.session_state.attendance = data
 
+            st.toast(
+                data["message"],
+                icon="☕"
+            )
 
+        else:
 
+            data = response.json()
+
+            st.error(data.get("detail", "Unable to start break"))
 
     def resume_break():
+            employee_id = st.session_state.employee_id
 
-        employee_id = st.session_state.employee_id
+            response = requests.post(
+                f"{URL}/break/resume",
+                params={
+                    "employee_id": employee_id
+                }
+            )
 
-        response = requests.post(
-            f"{URL}/break/resume",
-            params={
-                "employee_id": employee_id
-            }
-        )
+            if response.status_code == 200:
 
-        data = response.json()
+                data = response.json()
 
+                st.session_state.attendance = data
 
-        st.session_state.attendance = data
+                st.toast(
+                    data["message"],
+                    icon="▶️"
+                )
 
-        st.toast(
-            data["message"],
-            icon="▶️"
-        )
+            else:
 
+                data = response.json()
 
-
-
+                st.error(data.get("detail", "Unable to resume break"))
     tab1, tab2, tab3 = st.tabs(
         ["My Dashboard", "Details", "Leaves"]
     )
@@ -138,7 +153,7 @@ def dashboard():
                 st.dataframe(
                     details,
                     use_container_width=True,
-                    hide_index=True
+                    
                 )
 
             else:
@@ -250,10 +265,14 @@ def dashboard():
             st.write(st.session_state.full_name)
             st.write(st.session_state.email)
 
-            st.button(
+            signout=st.button(
                 "Sign out",
                 type="primary"
             )
+            if signout:
+                 st.session_state.page = "login"
+                 st.rerun()
+
 
     with tab1:
         col1, con, col2 = st.columns([3, 3, 3])
