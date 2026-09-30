@@ -5,6 +5,7 @@ from services.login import login_user
 
 
 
+
 class LoginData(BaseModel):
 
     email: EmailStr

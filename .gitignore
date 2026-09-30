@@ -1,11 +1,2 @@
-# Byte-compiled / optimized / DLL files
+pvenv/
 __pycache__/
-*.py[cod]
-*$py.class
-
-# OS metadata files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
