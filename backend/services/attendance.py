@@ -2,9 +2,6 @@ from datetime import datetime, timedelta
 from fastapi import HTTPException
 
 from repository.attendance import load_attendance, save_attendance
-from services.Location_based_check_in import check_location
-
-
 TIME_FORMAT = "%d-%b-%Y %I:%M:%S %p"
 
 
@@ -45,12 +42,7 @@ def checkin(employee_id):
 
     employee = get_employee(data, employee_id)
 
-    if check_location() is not True:
 
-        raise HTTPException(
-            status_code=400,
-            detail="The employee isn't within the office range"
-        )
 
     if employee["checkin"]:
 
@@ -214,13 +206,6 @@ def checkout(employee_id):
     data = load_attendance()
 
     employee = get_employee(data, employee_id)
-
-    if check_location() is not True:
-
-        raise HTTPException(
-            status_code=400,
-            detail="The employee isn't within the office range"
-        )
 
     if not employee["checkin"]:
 

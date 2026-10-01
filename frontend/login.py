@@ -9,7 +9,7 @@ FRONTEND_DIR = os.path.dirname(
 
 LOGO_PATH = os.path.join(
     FRONTEND_DIR,
-    "logo.png"
+    "lo.png"
 )
 
 API_URL = "http://127.0.0.1:8000"
