@@ -12,7 +12,7 @@ LOGO_PATH = os.path.join(
     "lo.png"
 )
 
-API_URL = "http://127.0.0.1:8000"
+API_URL = "https://k0bfnvp2-8000.inc1.devtunnels.ms"
 
 
 
