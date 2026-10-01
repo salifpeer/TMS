@@ -177,5 +177,18 @@
         "present_address": "ADLASH MAGAM",
         "password": "Salp123",
         "employee_id": "bb678249-fde6-4088-9ff3-86b17a70010d"
+    },
+    "94bff57f-439e-4144-a659-77bd1dcf172c": {
+        "full_name": "Banday_ Sameehah",
+        "email": "bandaysameehah@gmail.com",
+        "date_of_birth": "2000-01-01",
+        "gender": "Female",
+        "marital_status": "Single",
+        "nationality": "Indian",
+        "mobile": "1234567890",
+        "alternate_mobile": "1234567890",
+        "present_address": "bemina",
+        "password": "azhaazha",
+        "employee_id": "94bff57f-439e-4144-a659-77bd1dcf172c"
     }
 }
