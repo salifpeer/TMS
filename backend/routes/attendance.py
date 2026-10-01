@@ -32,6 +32,3 @@ def take_break(employee_id: str):
 def resume_break(employee_id: str):
 
     return attendance.resume_break(employee_id)
-@router.get("/tabledata")
-def get_details(employee_id:str):
-    return attendance.get_attendance(employee_id)
