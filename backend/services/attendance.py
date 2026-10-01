@@ -305,4 +305,4 @@ def get_attendance(employee_id):
 
     employee = data[employee_id]
 
-    return employee
+    return employee 
