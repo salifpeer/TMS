@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from fastapi import HTTPException
 
 from repository.attendance import load_attendance, save_attendance
-from services.Location_based_check_in import check_location
+
 
 
 TIME_FORMAT = "%d-%b-%Y %I:%M:%S %p"
