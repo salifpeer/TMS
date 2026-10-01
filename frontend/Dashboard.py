@@ -5,7 +5,7 @@ from location import location_page
 
 def dashboard():
 
-    URL = "http://127.0.0.1:8000"
+    URL = "https://k0bfnvp2-8000.inc1.devtunnels.ms"
 
     if "attendance" not in st.session_state:
         st.session_state.attendance = {
@@ -428,7 +428,7 @@ def dashboard():
             with col2:
 
                  st.button(
-            "🟡 Take Break",
+            "Take Break",
             on_click=take_break,
             key="break_button",
             use_container_width=True,
@@ -476,8 +476,13 @@ def dashboard():
                     ]
                 )
 
+        
+        
+        
         st.divider()
         container= st.container()
+        
+        
         with container:
             st.header("My checkin Details")    
            
@@ -487,7 +492,7 @@ def dashboard():
         employee_id = st.session_state.employee_id
  
         response = requests.get(
-        "http://127.0.0.1:8000/tabledata",
+         f"{URL}/tabledata",
         params={
             "employee_id": employee_id
         }
