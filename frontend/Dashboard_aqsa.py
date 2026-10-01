@@ -121,24 +121,7 @@ with tab1:
                 use_container_width=True
             )
 
-        with col3:
-            st.button(
-                "Resume",
-                key="resume_2",
-                use_container_width=True
-            )
-
-        with col4:
-            st.write("CBXNS381 - Salif Peer")
-
-        with col5:
-            st.write("Checked Out")
-
-        with col6:
-            st.write("23-Sep-2026 09:55 AM")
-
-        with col7:
-            st.write("06:00 PM")
+    
 
 
 with tab2:

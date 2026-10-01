@@ -18,7 +18,6 @@ def dashboard():
         }
 
     def checkin():
-        
 
         employee_id = st.session_state.employee_id
 
@@ -327,12 +326,10 @@ def dashboard():
             )
 
             st.image(
-                "https://th.bing.com/th/id/OIP.G37tgeQqSNt7v2oPfj9ltQHaE7?w=205&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&pid=1.7&rm=3",
-                width=100
-            )
-
-            st.write(
-                st.session_state.employee_id
+            "logo.png",
+                width=100,
+                
+                
             )
 
             st.write(
@@ -341,6 +338,10 @@ def dashboard():
 
             st.write(
                 st.session_state.email
+            )
+
+            st.write(
+                st.session_state.attendance["status"]
             )
 
             if st.button(
@@ -360,12 +361,7 @@ def dashboard():
 
         with col1:
 
-            st.button(
-                "Apply Leave",
-                width=100,
-                type="primary"
-            )
-
+            st.write(" ")
         with con:
 
             if st.button(
@@ -380,11 +376,7 @@ def dashboard():
 
         with col2:
 
-            st.button(
-                "Apply WFH",
-                width=100,
-                type="primary"
-            )
+            st.write(" ")
 
         st.subheader(
             "Check-in and check-out Details Report"
@@ -424,30 +416,35 @@ def dashboard():
             col1, col2, col3, col4, col5, col6, col7 = st.columns(
                 [2, 2, 2, 2, 1.5, 2.5, 2.5]
             )
-
+            
             with col1:
-
-                st.button(
+             st.button(
                     "Check Out",
                     on_click=checkout,
-                    key="checkout_button"
+                    key="checkout_button",
+                    
+                    type="secondary"
                 )
-
             with col2:
 
-                st.button(
-                    "Take Break",
-                    on_click=take_break,
-                    key="break_button"
-                )
+                 st.button(
+            "🟡 Take Break",
+            on_click=take_break,
+            key="break_button",
+            use_container_width=True,
+            type="secondary"
+        )
+            
 
             with col3:
 
                 st.button(
-                    "Resume",
-                    on_click=resume_break,
-                    key="resume_button"
-                )
+                        "Resume Work",
+                        on_click=resume_break,
+                        key="resume_button",
+                        use_container_width=True,
+                        type="primary"
+                    )
 
             with col4:
 
