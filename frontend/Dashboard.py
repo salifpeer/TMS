@@ -18,7 +18,6 @@ def dashboard():
 
 
     def checkin():
-        
 
         employee_id = st.session_state.employee_id
 
@@ -394,9 +393,6 @@ def dashboard():
                     "hello"
                 )
 
-
-            
-
             with col6:
 
                 st.write(
@@ -407,8 +403,48 @@ def dashboard():
 
                 st.write(
                     st.session_state.attendance["checkout_time"]
+          
+          
                 )
-        st.toast(
-                "Attendance data updated successfully!",
-                icon="✅"
-            )
+
+
+        st.divider()
+        container= st.container()
+        with container:
+            st.header("My checkin Details")    
+            
+            
+
+
+        employee_id = st.session_state.employee_id
+
+        response = requests.get(
+        "http://127.0.0.1:8000/tabledata",
+        params={
+            "employee_id": employee_id
+        }
+    )
+
+        if response.status_code == 200:
+
+          data = response.json()
+
+          rows = []
+
+          for date, details in data.items():
+
+            rows.append({
+                "Date": date,
+                "Status": details["status"],
+                "Check In": details["checkin"],
+                "Check Out": details["checkout"],
+                "Break Duration": details["break_duration"],
+                "Working Time": details["working_time"]
+            })
+
+          st.dataframe(
+            rows,
+            use_container_width=True
+        )
+
+            

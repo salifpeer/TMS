@@ -281,7 +281,7 @@ def checkout(employee_id):
     )
 
     working_time = total_time - break_duration
-
+    
     employee["working_time"] = str(working_time)
     employee["status"] = "Checked Out"
 
@@ -303,12 +303,6 @@ def get_attendance(employee_id):
 
     data = load_attendance()
 
-    employee = get_employee(data, employee_id)
+    employee = data[employee_id]
 
-    return {
-        "status": employee["status"],
-        "checkin_time": employee["checkin"] or "-",
-        "checkout_time": employee["checkout"] or "-",
-        "break_time": employee["break_duration"],
-        "working_time": employee["working_time"] or "-"
-    }
+    return employee
