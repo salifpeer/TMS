@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-<<<<<<< HEAD
 
 
 from services import attendance

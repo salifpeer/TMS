@@ -1,17 +1,14 @@
-
 import streamlit as st
 import requests
 from location import location_page
+from api import api_request
+
 
 def dashboard():
-<<<<<<< HEAD
-
-=======
     st.set_page_config(
-            layout="wide"
-        )
->>>>>>> 16b938c4ceecd7ac45a86ff7160d043ff2cff9d1
-    URL = "http://127.0.0.1:8000"
+                layout="wide"
+            )
+
 
     if "attendance" not in st.session_state:
         st.session_state.attendance = {
@@ -24,81 +21,49 @@ def dashboard():
         }
 
     def checkin():
- 
+
         employee_id = st.session_state.employee_id
-<<<<<<< HEAD
-        token = st.session_state.token
 
-        headers = {
-            "Authorization": f"Bearer {token}"
-        }
-=======
-    
-        headers = {
->>>>>>> 16b938c4ceecd7ac45a86ff7160d043ff2cff9d1
-
-            "Authorization": f"Bearer {st.session_state.token}"
-
-        }
-    
-        response = requests.post(
-
-            f"{URL}/checkin",
-
+        response = api_request(
+            "POST",
+            "/checkin",
             params={
-
                 "employee_id": employee_id
-<<<<<<< HEAD
-            },
-            headers = {
-                        "Authorization": f"Bearer {token}"
-                    }
-=======
-
-            },
-
-            headers=headers
-
->>>>>>> 16b938c4ceecd7ac45a86ff7160d043ff2cff9d1
+            }
         )
-    
+
         if response.status_code == 200:
-    
+
             data = response.json()
-    
+
             st.session_state.attendance = data
-    
+
             st.toast(
-
                 data["message"],
-
                 icon="✅"
-
             )
-    
+
         else:
-    
+
+            data = response.json()
+
             st.error(
-
-                f"Error {response.status_code}: {response.text}"
-
+                data.get(
+                    "detail",
+                    "Check-in failed"
+                )
             )
- 
 
     def checkout():
 
         employee_id = st.session_state.employee_id
 
-        token = st.session_state.token
-        headers = {
-            "Authorization": f"Bearer {token}"
-        }
-        response = requests.post(
-            f"{URL}/checkout",
+        response = api_request(
+            "POST",
+            "/checkout",
             params={
                 "employee_id": employee_id
-            },
-            headers=headers
+            }
         )
 
         if response.status_code == 200:
@@ -127,8 +92,9 @@ def dashboard():
 
         employee_id = st.session_state.employee_id
 
-        response = requests.post(
-            f"{URL}/break/start",
+        response = api_request(
+            "POST",
+            "/break/start",
             params={
                 "employee_id": employee_id
             }
@@ -160,8 +126,9 @@ def dashboard():
 
         employee_id = st.session_state.employee_id
 
-        response = requests.post(
-            f"{URL}/break/resume",
+        response = api_request(
+            "POST",
+            "/break/resume",
             params={
                 "employee_id": employee_id
             }
@@ -210,8 +177,9 @@ def dashboard():
 
         st.header("My personal Details")
 
-        response = requests.get(
-            f"{URL}/details",
+        response = api_request(
+            "GET",
+            "/details",
             params={
                 "employee_id":
                 st.session_state.employee_id
@@ -295,8 +263,9 @@ def dashboard():
 
             else:
 
-                response = requests.post(
-                    f"{URL}/leave",
+                response = api_request(
+                    "POST",
+                    "/leave",
                     json={
                         "employee_id":
                         st.session_state.employee_id,
@@ -321,8 +290,9 @@ def dashboard():
             "My Leave Applications"
         )
 
-        response = requests.get(
-            f"{URL}/leaves",
+        response = api_request(
+            "GET",
+            "/leaves",
             params={
                 "employee_id":
                 st.session_state.employee_id
@@ -366,10 +336,8 @@ def dashboard():
             )
 
             st.image(
-            "logo.png",
-                width=100,
-                
-                
+                "logo.png",
+                width=100
             )
 
             st.write(
@@ -531,12 +499,13 @@ def dashboard():
  
         employee_id = st.session_state.employee_id
  
-        response = requests.get(
-         f"{URL}/tabledata",
-        params={
-            "employee_id": employee_id
-        }
-    )
+        response = api_request(
+            "GET",
+            "/tabledata",
+            params={
+                "employee_id": employee_id
+            }
+        )
  
         if response.status_code == 200:
  

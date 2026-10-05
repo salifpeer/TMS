@@ -1,18 +1,4 @@
 from datetime import datetime, timedelta, timezone
-<<<<<<< HEAD
-
-from fastapi import Depends, HTTPException
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from jose import jwt, JWTError
-
-
-SECRET_KEY = "abd"
-ALGORITHM = "HS256"
-
-security = HTTPBearer()
-
-
-=======
  
 from fastapi import Depends, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
