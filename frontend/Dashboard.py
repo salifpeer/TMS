@@ -4,7 +4,9 @@ import requests
 from location import location_page
 
 def dashboard():
-
+    st.set_page_config(
+            layout="wide"
+        )
     URL = "https://k0bfnvp2-8000.inc1.devtunnels.ms"
 
     if "attendance" not in st.session_state:
