@@ -5,7 +5,7 @@ from location import location_page
 
 def dashboard():
 
-    URL = "https://k0bfnvp2-8000.inc1.devtunnels.ms"
+    URL = "http://127.0.0.1:8000"
 
     if "attendance" not in st.session_state:
         st.session_state.attendance = {
@@ -20,12 +20,20 @@ def dashboard():
     def checkin():
 
         employee_id = st.session_state.employee_id
+        token = st.session_state.token
+
+        headers = {
+            "Authorization": f"Bearer {token}"
+        }
 
         response = requests.post(
             f"{URL}/checkin",
             params={
                 "employee_id": employee_id
-            }
+            },
+            headers = {
+                        "Authorization": f"Bearer {token}"
+                    }
         )
 
         if response.status_code == 200:
@@ -54,11 +62,16 @@ def dashboard():
 
         employee_id = st.session_state.employee_id
 
+        token = st.session_state.token
+        headers = {
+            "Authorization": f"Bearer {token}"
+        }
         response = requests.post(
             f"{URL}/checkout",
             params={
                 "employee_id": employee_id
-            }
+            },
+            headers=headers
         )
 
         if response.status_code == 200:

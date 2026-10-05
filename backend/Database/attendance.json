@@ -55,6 +55,15 @@
             ],
             "break_duration": "0:00:07",
             "working_time": ""
+        },
+        "01-Oct-2026": {
+            "status": "Checked In",
+            "checkin": "01-Oct-2026 03:53:33 PM",
+            "checkout": "",
+            "break_starts": [],
+            "break_resumes": [],
+            "break_duration": "0:00:00",
+            "working_time": ""
         }
     }
 }
