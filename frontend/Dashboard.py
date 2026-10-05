@@ -7,7 +7,7 @@ def dashboard():
     st.set_page_config(
             layout="wide"
         )
-    URL = "https://k0bfnvp2-8000.inc1.devtunnels.ms"
+    URL = "http://127.0.0.1:8000"
 
     if "attendance" not in st.session_state:
         st.session_state.attendance = {
@@ -20,37 +20,51 @@ def dashboard():
         }
 
     def checkin():
-
+ 
         employee_id = st.session_state.employee_id
+    
+        headers = {
 
+            "Authorization": f"Bearer {st.session_state.token}"
+
+        }
+    
         response = requests.post(
+
             f"{URL}/checkin",
+
             params={
+
                 "employee_id": employee_id
-            }
+
+            },
+
+            headers=headers
+
         )
-
+    
         if response.status_code == 200:
-
+    
             data = response.json()
-
+    
             st.session_state.attendance = data
-
+    
             st.toast(
+
                 data["message"],
+
                 icon="✅"
-            )
 
+            )
+    
         else:
-
-            data = response.json()
-
+    
             st.error(
-                data.get(
-                    "detail",
-                    "Check-in failed"
-                )
+
+                f"Error {response.status_code}: {response.text}"
+
             )
+ 
 
     def checkout():
 

@@ -299,17 +299,18 @@ def checkout(employee_id):
 
 # GET ATTENDANCE
 
-
-def get_attendance(employee_id):
+def get_attendance(employee_id:str):
  
     data = load_attendance()
-
-    employee = get_employee(data, employee_id)
-
-    return {
-        "status": employee["status"],
-        "checkin_time": employee["checkin"] or "-",
-        "checkout_time": employee["checkout"] or "-",
-        "break_time": employee["break_duration"],
-        "working_time": employee["working_time"] or "-"
-    }
+ 
+    
+    
+    
+    return data[employee_id]
+    # return {
+    #     "status": employee["status"],
+    #     "checkin_time": employee["checkin"] or "-",
+    #     "checkout_time": employee["checkout"] or "-",
+    #     "break_time": employee["break_duration"],
+    #     "working_time": employee["working_time"] or "-"
+    # }
