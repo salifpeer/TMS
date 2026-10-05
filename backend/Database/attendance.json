@@ -55,6 +55,28 @@
             ],
             "break_duration": "0:00:07",
             "working_time": ""
+        },
+        "01-Oct-2026": {
+            "status": "Checked Out",
+            "checkin": "01-Oct-2026 11:36:11 AM",
+            "checkout": "01-Oct-2026 11:37:07 AM",
+            "break_starts": [
+                "01-Oct-2026 11:36:44 AM"
+            ],
+            "break_resumes": [
+                "01-Oct-2026 11:36:54 AM"
+            ],
+            "break_duration": "0:00:10",
+            "working_time": "0:00:46"
+        },
+        "05-Oct-2026": {
+            "status": "Checked Out",
+            "checkin": "05-Oct-2026 12:59:07 PM",
+            "checkout": "05-Oct-2026 03:23:31 PM",
+            "break_starts": [],
+            "break_resumes": [],
+            "break_duration": "0:00:00",
+            "working_time": "2:24:24"
         }
     }
 }

@@ -84,7 +84,7 @@ def login():
                 st.session_state.email = user["email"]
 
                 # Store token if you need it later
-                st.session_state.access_token = token
+                st.session_state.token = token
 
                 st.session_state.page = "dashboard"
 
