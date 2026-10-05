@@ -494,7 +494,7 @@ def dashboard():
         employee_id = st.session_state.employee_id
  
         response = requests.get(
-         f"{URL}/tabledata",
+         "http://127.0.0.1:8000/tabledata",
         params={
             "employee_id": employee_id
         }
