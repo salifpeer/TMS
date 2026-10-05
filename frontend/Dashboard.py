@@ -7,7 +7,7 @@ def dashboard():
     st.set_page_config(
             layout="wide"
         )
-    URL = "https://k0bfnvp2-8000.inc1.devtunnels.ms"
+    URL = "http://127.0.0.1:8000"
 
     if "attendance" not in st.session_state:
         st.session_state.attendance = {
