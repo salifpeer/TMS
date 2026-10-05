@@ -4,7 +4,9 @@ import requests
 from location import location_page
 
 def dashboard():
-
+    st.set_page_config(
+            layout="wide"
+        )
     URL = "https://k0bfnvp2-8000.inc1.devtunnels.ms"
 
     if "attendance" not in st.session_state:
@@ -423,7 +425,7 @@ def dashboard():
                     on_click=checkout,
                     key="checkout_button",
                     
-                    type="secondary"
+                    type="primary"
                 )
             with col2:
 
@@ -432,7 +434,7 @@ def dashboard():
             on_click=take_break,
             key="break_button",
             use_container_width=True,
-            type="secondary"
+            type="primary"
         )
             
 
