@@ -4,7 +4,13 @@ import requests
 from location import location_page
 
 def dashboard():
+<<<<<<< HEAD
 
+=======
+    st.set_page_config(
+            layout="wide"
+        )
+>>>>>>> 16b938c4ceecd7ac45a86ff7160d043ff2cff9d1
     URL = "http://127.0.0.1:8000"
 
     if "attendance" not in st.session_state:
@@ -18,45 +24,66 @@ def dashboard():
         }
 
     def checkin():
-
+ 
         employee_id = st.session_state.employee_id
+<<<<<<< HEAD
         token = st.session_state.token
 
         headers = {
             "Authorization": f"Bearer {token}"
         }
+=======
+    
+        headers = {
+>>>>>>> 16b938c4ceecd7ac45a86ff7160d043ff2cff9d1
 
+            "Authorization": f"Bearer {st.session_state.token}"
+
+        }
+    
         response = requests.post(
+
             f"{URL}/checkin",
+
             params={
+
                 "employee_id": employee_id
+<<<<<<< HEAD
             },
             headers = {
                         "Authorization": f"Bearer {token}"
                     }
+=======
+
+            },
+
+            headers=headers
+
+>>>>>>> 16b938c4ceecd7ac45a86ff7160d043ff2cff9d1
         )
-
+    
         if response.status_code == 200:
-
+    
             data = response.json()
-
+    
             st.session_state.attendance = data
-
+    
             st.toast(
+
                 data["message"],
+
                 icon="✅"
-            )
 
+            )
+    
         else:
-
-            data = response.json()
-
+    
             st.error(
-                data.get(
-                    "detail",
-                    "Check-in failed"
-                )
+
+                f"Error {response.status_code}: {response.text}"
+
             )
+ 
 
     def checkout():
 
@@ -436,7 +463,7 @@ def dashboard():
                     on_click=checkout,
                     key="checkout_button",
                     
-                    type="secondary"
+                    type="primary"
                 )
             with col2:
 
@@ -445,7 +472,7 @@ def dashboard():
             on_click=take_break,
             key="break_button",
             use_container_width=True,
-            type="secondary"
+            type="primary"
         )
             
 

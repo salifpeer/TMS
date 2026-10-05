@@ -190,5 +190,18 @@
         "present_address": "bemina",
         "password": "azhaazha",
         "employee_id": "94bff57f-439e-4144-a659-77bd1dcf172c"
+    },
+    "ee2a1cc9-cc8e-4ef9-8a83-634b2cb72024": {
+        "full_name": "fab",
+        "email": "muna@gmail.com",
+        "date_of_birth": "2000-01-12",
+        "gender": "Female",
+        "marital_status": "Single",
+        "nationality": "Indian",
+        "mobile": "1234567890",
+        "alternate_mobile": "1234567890",
+        "present_address": "fabulo",
+        "password": "hello",
+        "employee_id": "ee2a1cc9-cc8e-4ef9-8a83-634b2cb72024"
     }
 }
