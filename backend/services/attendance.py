@@ -45,13 +45,6 @@ def checkin(employee_id):
 
     employee = get_employee(data, employee_id)
 
-    if check_location() is not True:
-
-        raise HTTPException(
-            status_code=400,
-            detail="The employee isn't within the office range"
-        )
-
     if employee["checkin"]:
 
         return {
@@ -215,12 +208,6 @@ def checkout(employee_id):
 
     employee = get_employee(data, employee_id)
 
-    if check_location() is not True:
-
-        raise HTTPException(
-            status_code=400,
-            detail="The employee isn't within the office range"
-        )
 
     if not employee["checkin"]:
 

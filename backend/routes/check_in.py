@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends
 from auth.auth import verify_token
  
 router = APIRouter(
-    dependencies=[(verify_token)]
+    dependencies=[Depends(verify_token)]
 )
 
 @router.post("/checkin")

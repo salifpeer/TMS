@@ -8,16 +8,7 @@ from auth.auth import verify_token
 router = APIRouter(
     
 )
- 
- 
- 
- 
-@router.post("/checkin")
-def checkin(employee_id: str, authenticated: bool=Depends(verify_token)):
- 
-    return attendance.checkin(employee_id)
- 
- 
+
  
 @router.post("/checkout")
 def checkout(employee_id: str):
