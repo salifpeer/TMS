@@ -4,7 +4,9 @@ import requests
 from location import location_page
 
 def dashboard():
-
+    st.set_page_config(
+            layout="wide"
+        )
     URL = "http://127.0.0.1:8000"
 
     if "attendance" not in st.session_state:
@@ -18,37 +20,51 @@ def dashboard():
         }
 
     def checkin():
-
+ 
         employee_id = st.session_state.employee_id
+    
+        headers = {
 
+            "Authorization": f"Bearer {st.session_state.token}"
+
+        }
+    
         response = requests.post(
+
             f"{URL}/checkin",
+
             params={
+
                 "employee_id": employee_id
-            }
+
+            },
+
+            headers=headers
+
         )
-
+    
         if response.status_code == 200:
-
+    
             data = response.json()
-
+    
             st.session_state.attendance = data
-
+    
             st.toast(
+
                 data["message"],
+
                 icon="✅"
-            )
 
+            )
+    
         else:
-
-            data = response.json()
-
+    
             st.error(
-                data.get(
-                    "detail",
-                    "Check-in failed"
-                )
+
+                f"Error {response.status_code}: {response.text}"
+
             )
+ 
 
     def checkout():
 
@@ -423,16 +439,16 @@ def dashboard():
                     on_click=checkout,
                     key="checkout_button",
                     
-                    type="secondary"
+                    type="primary"
                 )
             with col2:
 
                  st.button(
-            "🟡 Take Break",
+            "Take Break",
             on_click=take_break,
             key="break_button",
             use_container_width=True,
-            type="secondary"
+            type="primary"
         )
             
 
@@ -476,8 +492,13 @@ def dashboard():
                     ]
                 )
 
+        
+        
+        
         st.divider()
         container= st.container()
+        
+        
         with container:
             st.header("My checkin Details")    
            
@@ -487,7 +508,7 @@ def dashboard():
         employee_id = st.session_state.employee_id
  
         response = requests.get(
-        "http://127.0.0.1:8000/tabledata",
+         f"{URL}/tabledata",
         params={
             "employee_id": employee_id
         }
