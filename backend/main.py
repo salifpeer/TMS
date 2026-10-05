@@ -6,6 +6,13 @@ from routes.Register import router as register_router
 from routes.login import router as login_router
 from routes.check_in import router as checkin_router
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.include_router(attendance_router)
 app.include_router(leaves_router)
 app.include_router(details_router)

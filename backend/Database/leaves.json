@@ -33,6 +33,12 @@
             "end_date": "2026-09-30",
             "reason": "kng5l;",
             "total_leave_days": 1
+        },
+        {
+            "start_date": "2026-10-01",
+            "end_date": "2026-10-01",
+            "reason": "dgthg",
+            "total_leave_days": 1
         }
     ]
 }
