@@ -1,10 +1,14 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 
 from services import leaves
+from auth.auth import verify_token
+ 
 
-
-router = APIRouter()
+ 
+router = APIRouter(
+    dependencies=[Depends(verify_token)]
+)
 
 
 class LeaveRequest(BaseModel):
