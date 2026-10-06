@@ -20,19 +20,6 @@ def checkin(employee_id: str):
 
 
 
-=======
-  
-from services import attendance
-from fastapi import APIRouter, Depends
- 
-from auth.auth import verify_token
- 
-router = APIRouter(
-    
-)
-
- 
->>>>>>> 16b938c4ceecd7ac45a86ff7160d043ff2cff9d1
 @router.post("/checkout")
 def checkout(employee_id: str):
  
